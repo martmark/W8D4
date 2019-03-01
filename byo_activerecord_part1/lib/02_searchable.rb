@@ -18,15 +18,5 @@ end
 
 class SQLObject
   extend Searchable
-
-  #  def self.where(params)
-  #   set_line = params.key.map { |param| "#{param} = ?"}.join(" AND ")
-  #   tablename = self.class.table_name.to_s
-  #   # debugger
-  #   DBConnection.execute(<<-SQL, *params.values)
-  #     SELECT * FROM #{ tablename } WHERE #{ set_line }
-  #   SQL
-  #   # data.map { |datum| self.class.new(datum) }
-  #end
 end
 

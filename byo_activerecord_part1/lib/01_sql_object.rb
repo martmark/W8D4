@@ -112,23 +112,9 @@ class SQLObject
   end
 
   def update
-    # cols = "(" + self.class.columns[1..-1].join(",") + ")"
-    question_marks = ['?'] * (self.class.columns.length)
-    
     set_line = self.class.columns.map { |col| "#{col} = ?"}.join(",")
-    question_string = "(" + question_marks.join(",") + ")"
-    # vals = self.attribute_values
     tablename = self.class.table_name.to_s
 
-    array = []
-
-    self.attributes.each do |k, v|
-      array << '#{k} = #{v}'
-    end
-
-    set_string = array.join(",")
-
-    # debugger
     DBConnection.execute(<<-SQL, *self.attribute_values, self.id)
     UPDATE #{ tablename } 
     SET #{ set_line }
